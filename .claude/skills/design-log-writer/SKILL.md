@@ -12,7 +12,7 @@ updated during/after implementation.
 
 ## Hard gates (when to use)
 
-Use this workflow **before writing implementation code** if *any* is true:
+Use this workflow **before writing implementation code** if _any_ is true:
 
 - New user-visible feature (including “simple demo” features)
 - Adds a new file (component/hook/util/module)
@@ -78,8 +78,11 @@ Once implementation starts:
   - Test/lint/build results
   - Deviations (and why)
 
-## Minimal example (data fetching UI)
+## Minimal example (business logic + UI)
 
-- Hook owns business logic: `useXyz()` → `{ data, isLoading, error, reload }`
-- Component is render-only: `XyzCard({ data, ... })`
+- Business logic lives in `lib/<namespace>/*` (pure/testable when possible)
+- Hook orchestrates business logic for React reusability:
+  - `useXyz()` → `{ data, isLoading, error, reload }`
+- UI is render-only: `XyzCard({ data, ... })`
 
+See `/.claude/rules/10-architecture.md` for the 3-layer rule.
