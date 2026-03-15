@@ -10,7 +10,10 @@ export default function Container({
 }: ContainerProps) {
   return (
     <div
-      className={clsx('layout-container max-w-7xl px-4 mx-auto', className)}
+      className={clsx(
+        'layout-container w-full max-w-7xl px-4 mx-auto',
+        className,
+      )}
       {...rest}
     >
       {children}
