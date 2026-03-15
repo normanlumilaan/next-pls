@@ -9,23 +9,51 @@ alwaysApply: true
 
 The project follows a rigorous design log methodology for all significant features and architectural changes.
 
+## Non-negotiable gates (machine-friendly)
+
+These rules are intended to prevent “it’s small, I’ll just code it” rationalization.
+
+### Hard stop conditions (design log REQUIRED)
+
+Create a design log **before writing any implementation code** if *any* of the following is true:
+
+1. **New feature**: introduces a new user-visible capability (even “simple demo” features).
+2. **New file**: adds a new component/hook/util/module file.
+3. **Data fetching**: adds `fetch`, API clients, server actions, GraphQL, or any network I/O.
+4. **Stateful UI**: adds React state/effects (`useState`, `useEffect`, `useReducer`) or async flows.
+5. **Cross-file change**: touches \(≥ 2\) source files to complete the task.
+6. **New dependency**: adds/updates packages or requires config changes.
+
+### Allowed without a design log (explicit exceptions)
+
+You may proceed directly **without** a design log only when **all** are true:
+
+- **No new files**
+- **No data fetching**
+- **No state/effects**
+- **Single-file change**
+- **Low risk**: copy/typo/styling refactor, or small bugfix with no meaningful trade-offs
+
+If uncertain, treat it as “design log required”.
+
+### “design-log/ missing” bootstrap rule
+
+If `./design-log/` or `./design-log/index.md` does not exist, create them **immediately** with:
+
+- `design-log/index.md` containing the index tables
+- `design-log/_template.md` containing the log template
+
+### Procedure lives in a skill
+
+When any hard stop condition applies, follow the project skill:
+
+- `.claude/skills/design-log-writer/SKILL.md`
+
 ### Before Making Changes
 
 1. **Check design logs** in `./design-log/` for existing designs and implementation notes
 2. **For new features**: Create design log first, get approval, then implement
 3. **Read related design logs** to understand context and constraints
-
-### When Creating Design Logs
-
-1. **Structure**: Background → Problem → Questions and Answers → Design → Implementation Plan → Examples → Trade-offs
-2. **Be specific**: Include file paths, type signatures, validation rules
-3. **Show examples**: Use ✅/❌ for good/bad patterns, include realistic code
-4. **Explain why**: Don't just describe what, explain rationale and trade-offs
-5. **Ask Questions (in the file)**: For anything that is not clear, or missing information
-6. **When answering question**: keep the questions, just add answers
-7. **Be brief**: write short explanations and only what most relevant
-8. **Draw Diagrams**: Use mermain inline diagrams when it makes sense
-9. **Define verification criteria**: how do we know the implementation solves the original problem
 
 ### When Implementing
 

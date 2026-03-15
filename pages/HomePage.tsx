@@ -1,3 +1,4 @@
+import TypicodeUsers from '@/components/data/TypicodeUsers'
 import Header from '@/components/header/Header'
 import Container from '@/components/layout/Container'
 import Footer from '@/components/layout/Footer'
@@ -19,6 +20,9 @@ export default function HomePage() {
       <Section id="welcome">
         <Container>
           <h1>Home</h1>
+          <div className="mt-6">
+            <TypicodeUsers />
+          </div>
         </Container>
       </Section>
       <Footer />
