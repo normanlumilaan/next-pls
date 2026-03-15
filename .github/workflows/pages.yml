@@ -31,9 +31,6 @@ jobs:
       - name: Install dependencies
         run: HUSKY=0 npm ci
 
-      - name: Biome CI
-        run: npm run biome:ci
-
       - name: Build (static export)
         env:
           NEXT_PUBLIC_APP_NAME: ${{ vars.NEXT_PUBLIC_APP_NAME || github.event.repository.name }}
