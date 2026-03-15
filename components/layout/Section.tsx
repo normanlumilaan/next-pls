@@ -1,23 +1,23 @@
 import clsx from 'clsx'
 import type { ComponentPropsWithoutRef } from 'react'
 
-export type SectionLayoutProps = ComponentPropsWithoutRef<'section'>
+export type SectionProps = ComponentPropsWithoutRef<'section'>
 
 /**
- * A section layout component
- * @param {SectionLayoutProps} props - The props for the section layout component
+ * A section component
+ * @param {SectionProps} props - The props for the section component
  * @param {React.ReactNode} props.children - The children for the section layout component
  * @param {string} props.className - The class name for the section layout component
  * @param {React.HTMLAttributes<HTMLSectionElement>} props.rest - The rest of the props for the section layout component
  * @returns
  */
-export default function SectionLayout({
+export default function Section({
   children,
   className,
   ...rest
-}: SectionLayoutProps) {
+}: SectionProps) {
   return (
-    <section className={clsx('section-layout columns-12', className)} {...rest}>
+    <section className={clsx('section', className)} {...rest}>
       {children}
     </section>
   )
