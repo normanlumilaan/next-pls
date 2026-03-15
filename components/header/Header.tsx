@@ -1,4 +1,3 @@
-import clsx from 'clsx'
 import Link from 'next/link'
 import type { ComponentPropsWithoutRef } from 'react'
 import AppLogo from '@/components/graphics/AppLogo'
@@ -14,17 +13,17 @@ export default function Header({ className, ...rest }: HeaderProps) {
     <header
       id="header"
       data-testid="header"
-      className={clsx('header py-4', className)}
+      className="header py-4 shadow-md"
       {...rest}
     >
       <Container>
-        <div className="columns-2 gap-4">
-          <div className="flex justify-start">
+        <div className="flex items-center w-full gap-4">
+          <div>
             <Link href={getAppBaseUrl()} aria-label={getAppName()}>
               <AppLogo />
             </Link>
           </div>
-          <nav className="flex justify-end">
+          <nav className="ml-auto">
             <MainMenu items={mainMenuItems} />
           </nav>
         </div>

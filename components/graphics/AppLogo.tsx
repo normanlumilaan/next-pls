@@ -4,7 +4,7 @@ import { getAppName } from '@/utils/app'
 
 export default function AppLogo() {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex shrink-0 items-center gap-2">
       <Image
         className="w-5 h-auto block"
         src={logo}
@@ -12,7 +12,9 @@ export default function AppLogo() {
         width={100}
         height={100}
       />
-      <span className="text-base font-bold">{getAppName()}</span>
+      <span className="text-base font-bold whitespace-nowrap">
+        {getAppName()}
+      </span>
     </div>
   )
 }
