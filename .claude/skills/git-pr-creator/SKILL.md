@@ -1,6 +1,6 @@
 ---
 name: git-pr-creator
-description: Creates GitHub pull requests using the repo PR template. Use when the user asks to create/open a PR, draft a PR description, or generate a PR title/body from git changes.
+description: Create GitHub PRs using the repo PR template.
 ---
 
 # Git PR Creator
