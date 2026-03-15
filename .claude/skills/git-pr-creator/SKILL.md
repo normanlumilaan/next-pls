@@ -1,6 +1,6 @@
 ---
 name: git-pr-creator
-description: Creates GitHub pull requests using the repo PR template. Use when the user asks to create/open a PR, draft a PR description, or generate a PR title/body from git changes.
+description: Create GitHub PRs using the repo PR template.
 ---
 
 # Git PR Creator
@@ -30,9 +30,11 @@ Create a high-quality GitHub Pull Request that matches the repository’s PR tem
 ### 1) Determine intent: draft text vs create PR
 
 If the user asks for PR copy only:
+
 - Produce a PR **title** and **body** using the template format below.
 
 If the user asks to create/open the PR:
+
 - Prepare title/body, then create the PR with `gh pr create`.
 
 ### 2) Collect repo state (must do before writing)
@@ -48,12 +50,14 @@ Run these commands:
 - `git diff <base>...HEAD`
 
 If there are uncommitted changes:
+
 - Ask the user whether to include them (commit) or leave them out.
 - If the user wants to proceed anyway, clearly state PR reflects commits only.
 
 ### 3) Draft PR title
 
 Pick a title that:
+
 - Is concise and descriptive
 - Matches the repo’s conventions if present
 - Uses present tense (“Add…”, “Fix…”, “Update…”)
@@ -106,6 +110,7 @@ Guidance per section:
 ### 5) Create the PR (only when asked)
 
 If branch isn’t pushed or upstream isn’t set:
+
 - `git push -u origin HEAD`
 
 Then create PR:
@@ -118,6 +123,7 @@ EOF
 ```
 
 After creation:
+
 - Return the PR URL
 - Summarize: 1–2 bullets of what’s included
 
