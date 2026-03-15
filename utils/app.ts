@@ -1,3 +1,7 @@
+/**
+ * Get the base URL of the application
+ * @returns The base URL of the application
+ */
 export const getAppBaseUrl = (): string => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
   if (!baseUrl) {
@@ -6,6 +10,10 @@ export const getAppBaseUrl = (): string => {
   return baseUrl
 }
 
+/**
+ * Get the name of the application
+ * @returns The name of the application
+ */
 export const getAppName = (): string => {
   const appName = process.env.NEXT_PUBLIC_APP_NAME
   if (!appName) {

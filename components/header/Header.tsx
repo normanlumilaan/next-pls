@@ -3,6 +3,8 @@ import Link from 'next/link'
 import type { ComponentPropsWithoutRef } from 'react'
 import AppLogo from '@/components/graphics/AppLogo'
 import Container from '@/components/layout/Container'
+import MainMenu from '@/components/menus/MainMenu'
+import { mainMenuItems } from '@/data/main-menu'
 import { getAppBaseUrl, getAppName } from '@/utils/app'
 
 export type HeaderProps = ComponentPropsWithoutRef<'header'>
@@ -22,7 +24,9 @@ export default function Header({ className, ...rest }: HeaderProps) {
               <AppLogo />
             </Link>
           </div>
-          <div className="flex justify-end">B</div>
+          <nav className="flex justify-end">
+            <MainMenu items={mainMenuItems} />
+          </nav>
         </div>
       </Container>
     </header>
