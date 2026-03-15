@@ -12,7 +12,7 @@ home page UI.
 ## Problem
 
 Add a simple UI component that fetches and displays dummy REST data from
-JSONPlaceholder (Typicode) and render it on `pages/HomePage.tsx`.
+JSONPlaceholder (Typicode) and render it on `components/pages/HomePage.tsx`.
 
 ## Questions and Answers
 
@@ -42,7 +42,7 @@ Intended split:
 
 1. Create design log + index entry.
 2. Implement client-side fetch with abort support.
-3. Render component in `pages/HomePage.tsx`.
+3. Render component in `components/pages/HomePage.tsx`.
 4. Verify `npm run biome:ci` and `npm run build`.
 
 ## Examples
@@ -73,8 +73,9 @@ Intended split:
 ## Implementation Results
 
 - Implemented `components/data/TypicodeUsers.tsx` and rendered in
-  `pages/HomePage.tsx`.
-- Deviation: business + presentation are currently combined in one component.
-  This should be split into hook + render component to fully comply with the
-  separation rule.
+  `components/pages/HomePage.tsx`.
+- Refactored to match the 3-layer pattern:
+  - `lib/typicode/*`: fetch + parse + types
+  - `hooks/useTypicodeUsers.ts`: React orchestration
+  - `components/data/*`: UI glue + presentational card
 

@@ -1,0 +1,31 @@
+---
+description: Core workflow gates (Cursor mirror)
+alwaysApply: true
+---
+
+# Core workflow gates (Cursor)
+
+This is a **thin mirror** of the canonical rules in `/.claude/`.
+
+## Canonical entrypoint
+
+- Read and follow `/.claude/CLAUDE.md`
+
+## Canonical rules (details)
+
+- `/.claude/rules/00-core.md`
+- `/.claude/rules/05-design-log.md`
+- `/.claude/rules/10-architecture.md`
+- `/.claude/rules/20-jsdoc.md`
+- `/.claude/rules/30-react.md`
+- `/.claude/rules/40-typescript.md`
+
+## Non-negotiables (summary)
+
+- **Design log gate**: if it triggers, create/approve the design log before coding
+- **Architecture**: always separate business logic from UI (lib → hook → UI)
+- **Explicitness**: prefer explicit intent over implicit conventions
+- **Docs**: exported components/hooks/functions document params + returns
+- **Checks**: after substantive edits run `npm run biome:ci`.
+  Only run `npm run build` when explicitly requested.
+

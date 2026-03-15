@@ -37,4 +37,4 @@ Pages under `/next-pls` (outputs to `out/`).
 
 [Agent Skills](https://agentskills.io/home)
 
-[Design-log method](https://www.wix.engineering/post/why-i-stop-prompting-and-start-logging-the-design-log-methodology)
+[The Design-Log Methodology](https://www.wix.engineering/post/why-i-stop-prompting-and-start-logging-the-design-log-methodology)

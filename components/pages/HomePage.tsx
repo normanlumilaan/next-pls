@@ -14,7 +14,7 @@ export default function HomePage() {
         id="hero"
         className="py-24 min-h-[80dvh] text-white flex flex-col items-start justify-end"
       >
-        <h1 className="text-4xl font-bold">Your AI-Powered Travel Companion</h1>
+        <h1 className="text-4xl font-bold">Your AI-Powered playground</h1>
         <strong>Welcome to the home page</strong>
       </Hero>
       <Section id="welcome">
