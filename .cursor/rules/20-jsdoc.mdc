@@ -1,0 +1,16 @@
+---
+description: JSDoc requirements for exported APIs (Cursor mirror)
+globs: "**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# JSDoc requirements
+
+Canonical: `/.claude/rules/20-jsdoc.md`
+
+For exported components/hooks/functions:
+
+- Include purpose
+- Include `@param` for each parameter (props included)
+- Include `@returns`
+

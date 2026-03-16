@@ -1,0 +1,18 @@
+---
+description: Design log gate (Cursor mirror)
+alwaysApply: true
+---
+
+# Design log gate (Cursor)
+
+Canonical: `/.claude/rules/05-design-log.md` + `/.claude/skills/design-log-writer/SKILL.md`
+
+Create a design log **before writing implementation code** if any is true:
+
+- New feature (user-visible capability, including “simple demo” features)
+- New file (component/hook/util/module)
+- Data fetching / network I/O
+- React state/effects or async flows
+- Touches \(≥ 2\) source files to complete the task
+- Adds/updates dependencies or config
+

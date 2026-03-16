@@ -1,0 +1,16 @@
+---
+description: Business vs UI separation (Cursor mirror)
+globs: "**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# Architecture: business vs presentation
+
+Canonical: `/.claude/rules/10-architecture.md`
+
+Follow the required 3-layer pattern for **any** business logic:
+
+1. `lib/<namespace>/` (pure/testable business logic)
+2. `hooks/` (React orchestration)
+3. UI component (render view state: loading/error/success)
+

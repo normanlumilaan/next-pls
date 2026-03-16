@@ -1,83 +1,73 @@
 ---
 name: git-pr-creator
-description: Create GitHub PRs using the repo PR template.
+description: >-
+  Create GitHub PRs using the repo PR template with Linear ticket integration.
+  Use when the user asks to create a PR, draft PR text, open a pull request,
+  or write a PR description.
 ---
 
 # Git PR Creator
 
-## Goal
-
-Create a high-quality GitHub Pull Request that matches the repository’s PR template and style preferences.
-
-## Inputs (derive automatically)
-
-- Current branch name and whether it tracks a remote
-- Base branch (`main` preferred, else `master`, else repo default)
-- Commit range since divergence from base
-- Full diff since divergence from base
-- Existing PR template at `.github/pull_request_template.md`
+Create a GitHub Pull Request that follows the repo's PR template and conventions.
 
 ## Guardrails
 
-- Do not change code to “make the PR look better” unless the user asked.
-- Do not push, create PRs, or modify remotes unless the user asked to actually create the PR (vs “draft the text”).
-- Never force-push.
-- Use short, present-tense bullets; keep bullets ≤ 70 chars when possible.
-- Prefer describing **what changed** and **why**, not implementation detail.
+- Never change code to "make the PR look better" unless the user asked
+- Never push, create PRs, or modify remotes unless the user asked to actually create the PR (vs "draft the text")
+- Never force-push
+- Use short, present-tense bullets (≤ 70 chars when possible)
+- Describe **what changed** and **why**, not implementation detail
 
 ## Workflow
 
-### 1) Determine intent: draft text vs create PR
+### 1. Determine intent
 
-If the user asks for PR copy only:
+- **Draft only** — produce a PR title and body for the user to review
+- **Create PR** — prepare title/body, then create with `gh pr create`
 
-- Produce a PR **title** and **body** using the template format below.
+### 2. Collect repo state
 
-If the user asks to create/open the PR:
-
-- Prepare title/body, then create the PR with `gh pr create`.
-
-### 2) Collect repo state (must do before writing)
-
-Run these commands:
+Run these in parallel:
 
 - `git status`
 - `git log --oneline --decorate -n 30`
 - `git rev-parse --abbrev-ref HEAD`
-- Determine base branch:
-  - Prefer `main`; else `master`; else infer from `git remote show origin`
+- Determine base branch: prefer `main`, else `master`, else infer from `git remote show origin`
+
+Then using the resolved base branch:
+
 - `git log --oneline <base>..HEAD`
 - `git diff <base>...HEAD`
 
-If there are uncommitted changes:
+If there are uncommitted changes, ask the user whether to commit them or proceed with commits only.
 
-- Ask the user whether to include them (commit) or leave them out.
-- If the user wants to proceed anyway, clearly state PR reflects commits only.
+### 3. Draft PR title
 
-### 3) Draft PR title
+**With Linear ticket** — If the branch name contains a Linear ticket identifier (e.g., `ENG-123`, `FE-45`):
 
-Pick a title that:
+1. Call the Linear MCP `get_issue` tool with the extracted identifier to fetch the ticket title
+2. Format: `TICKET-NUMBER: Ticket Title`
+3. Example: `ENG-123: Add OAuth2 login with Google`
 
-- Is concise and descriptive
-- Matches the repo’s conventions if present
-- Uses present tense (“Add…”, “Fix…”, “Update…”)
+**Without Linear ticket** — If no ticket identifier is found in the branch name:
 
-If the branch includes multiple commits, prefer a title that summarizes the
-overall outcome rather than a single file-level change.
+1. Write a concise, descriptive title based on the diff
+2. Use present tense ("Add…", "Fix…", "Update…")
+3. Summarize the overall outcome, not a single file-level change
+4. Example: `Add OAuth2 login with Google`
 
-### 4) Draft PR body (MUST match `.github/pull_request_template.md`)
+### 4. Draft PR body
 
-Use this exact structure:
+Follow the template at `.github/pull_request_template.md` if it exists. Otherwise use this structure:
 
 ```markdown
 # Reason for change
 
-<1–3 short bullets. Explain why this PR exists.>
+- <1–3 bullets explaining why this PR exists>
 
 ## Changes made
 
-- <bullet>
-- <bullet>
+- <observable behavior changes, not implementation detail>
 
 ## How to test
 
@@ -85,35 +75,29 @@ Use this exact structure:
 
 ## Screenshots
 
-- <If UI change: before/after or "N/A">
+- <before/after for UI changes, or "N/A">
 
 ## Additional notes
 
-- <Risks, follow-ups, rollout notes, migrations, etc., or "N/A">
+- <risks, follow-ups, migrations, or "N/A">
 ```
 
-Guidance per section:
+Section guidance:
 
-- **Reason for change**:
-  - Explain motivation, bug, request, or context.
-- **Changes made**:
-  - Describe observable behavior changes.
-  - Avoid deep implementation details.
-- **How to test**:
-  - Include exact pages/flows.
-  - Mention any feature flags, env vars, or test accounts if relevant.
-- **Screenshots**:
-  - If not applicable, write `N/A` (don’t leave blank).
-- **Additional notes**:
-  - Mention known limitations, follow-ups, or risky areas.
+- **Reason for change** — motivation, bug, request, or business context
+- **Changes made** — what the user/system will experience differently
+- **How to test** — exact pages, flows, feature flags, env vars, or test accounts
+- **Screenshots / Additional notes** — never leave blank; write `N/A` if not applicable
 
-### 5) Create the PR (only when asked)
+### 5. Create the PR (only when asked)
 
-If branch isn’t pushed or upstream isn’t set:
+If the branch isn't pushed or has no upstream:
 
-- `git push -u origin HEAD`
+```bash
+git push -u origin HEAD
+```
 
-Then create PR:
+Then:
 
 ```bash
 gh pr create --title "<TITLE>" --body "$(cat <<'EOF'
@@ -122,15 +106,12 @@ EOF
 )"
 ```
 
-After creation:
+After creation, return the PR URL and a 1–2 bullet summary of what's included.
 
-- Return the PR URL
-- Summarize: 1–2 bullets of what’s included
+## Validate before presenting
 
-## Quality checklist (before final output)
-
-- Title is present tense and outcome-focused
-- Body matches template headings exactly
+- Title follows the correct format (ticket-based or descriptive)
+- Body matches the template headings exactly
 - Bullets are concise (≤ 70 chars when reasonable)
-- “How to test” is actionable (not generic)
-- Screenshots and Additional notes are not blank
+- "How to test" is actionable, not generic
+- Screenshots and Additional notes are filled in or `N/A`

@@ -32,3 +32,9 @@ npm run biome:ci
 
 The app is configured for static export and deploys via GitHub Actions to GitHub
 Pages under `/next-pls` (outputs to `out/`).
+
+## AI stuff
+
+[Agent Skills](https://agentskills.io/home)
+
+[The Design-Log Methodology](https://www.wix.engineering/post/why-i-stop-prompting-and-start-logging-the-design-log-methodology)
