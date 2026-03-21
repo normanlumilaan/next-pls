@@ -12,12 +12,7 @@ export const mainMenuItems: MainMenuItem[] = [
   },
   {
     id: 'main-menu-about',
-    label: 'About',
-    href: '/about',
-  },
-  {
-    id: 'main-menu-contact',
-    label: 'Contact',
-    href: '/contact',
+    label: 'Articles',
+    href: '/articles',
   },
 ]
