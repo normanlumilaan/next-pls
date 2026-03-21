@@ -23,9 +23,9 @@ export default function Header({ className, ...rest }: HeaderProps) {
               <AppLogo />
             </Link>
           </div>
-          <nav className="ml-auto">
+          <div className="ml-auto">
             <MainMenu items={mainMenuItems} />
-          </nav>
+          </div>
         </div>
       </Container>
     </header>

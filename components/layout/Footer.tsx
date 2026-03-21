@@ -1,8 +1,6 @@
 import clsx from 'clsx'
 import type { ComponentPropsWithoutRef } from 'react'
 import Container from '@/components/layout/Container'
-import MainMenu from '@/components/menus/MainMenu'
-import { mainMenuItems } from '@/data/main-menu'
 import { getAppName } from '@/utils/app'
 import styles from './footer.module.css'
 
@@ -21,9 +19,6 @@ export default function Footer({
       {...rest}
     >
       <Container>
-        <nav>
-          <MainMenu items={mainMenuItems} />
-        </nav>
         <div className="text-center text-sm">
           <span>
             © {new Date().getFullYear()} {getAppName()}. All rights reserved.

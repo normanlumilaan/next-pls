@@ -1,0 +1,18 @@
+query ArticleBySlug($slug: String!) {
+  articleCollection(where: { contentfulID: $slug }, limit: 1) {
+    items {
+      sys {
+        id
+      }
+      contentfulId
+      title
+      content
+      mediaCollection {
+        items {
+          ...AssetFields
+        }
+      }
+    }
+  }
+}
+

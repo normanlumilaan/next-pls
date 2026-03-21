@@ -1,38 +1,29 @@
 /**
  * Fetch data from Contentful using the GraphQL API
- * @param query - The GraphQL query/document to execute
+ * @param document - The GraphQL document to execute
  * @param variables - Variables for the GraphQL query
  * @param preview - Whether to use the preview API
  * @returns The response from the Contentful API
  */
-import { type DocumentNode, print } from 'graphql'
+import type { TypedDocumentNode } from '@graphql-typed-document-node/core'
+import { print } from 'graphql'
 
-type GraphQLVariables = Record<string, unknown>
-type GraphQLDocument = string | DocumentNode
+type GraphQLResponse<TResult> = {
+  data?: TResult
+  errors?: Array<{ message: string }>
+}
 
-export async function fetchGraphQL(
-  query: GraphQLDocument,
-  preview?: boolean,
-): Promise<unknown>
-export async function fetchGraphQL(
-  query: GraphQLDocument,
-  variables?: GraphQLVariables,
-  preview?: boolean,
-): Promise<unknown>
-export async function fetchGraphQL(
-  query: GraphQLDocument,
-  variablesOrPreview: GraphQLVariables | boolean = {},
+export async function fetchGraphQL<TResult, TVariables>(
+  document: TypedDocumentNode<TResult, TVariables>,
+  variables: TVariables,
   preview = false,
-) {
-  const variables =
-    typeof variablesOrPreview === 'boolean' ? undefined : variablesOrPreview
-  const resolvedPreview =
-    typeof variablesOrPreview === 'boolean' ? variablesOrPreview : preview
+): Promise<TResult> {
+  const resolvedPreview = preview
 
   const environment = process.env.CONTENTFUL_ENVIRONMENT ?? 'master'
-  const queryString = typeof query === 'string' ? query : print(query)
+  const query = print(document)
 
-  return fetch(
+  const json = (await fetch(
     `${process.env.CONTENTFUL_API_URL}/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/${environment}`,
     {
       method: 'POST',
@@ -46,10 +37,16 @@ export async function fetchGraphQL(
             : process.env.CONTENTFUL_ACCESS_TOKEN
         }`,
       },
-      body: JSON.stringify({ query: queryString, variables }),
+      body: JSON.stringify({ query, variables }),
       // Associate all fetches for articles with an "articles" cache tag so content can
       // be revalidated or updated from Contentful on publish
       next: { tags: ['articles'] },
     },
-  ).then(response => response.json())
+  ).then(response => response.json())) as GraphQLResponse<unknown>
+
+  if (json.errors?.length) {
+    throw new Error(json.errors.map(e => e.message).join('\n'))
+  }
+
+  return json.data as TResult
 }

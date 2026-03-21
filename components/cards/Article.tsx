@@ -1,17 +1,9 @@
-import type { ComponentPropsWithoutRef } from 'react'
-
 export type ArticleProps = {
-  title: string
-  content: string
-} & ComponentPropsWithoutRef<'article'>
+  title: string | null | undefined
+  content: string | null | undefined
+}
 
-export default function Article({
-  title,
-  content,
-}: {
-  title: string
-  content: string
-}) {
+export default function Article({ title, content }: ArticleProps) {
   return (
     <article>
       <header>

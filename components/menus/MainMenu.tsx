@@ -1,27 +1,29 @@
-import Link from 'next/link'
-import type { MainMenuItem } from '@/data/main-menu'
+'use client'
 
+import { useId, useState } from 'react'
+import type { MainMenuItem } from '@/data/main-menu'
+import { MainMenuNavigation } from './MainMenuNavigation'
 export interface MainMenuProps {
   items: MainMenuItem[]
 }
 
 export default function MainMenu({ items }: MainMenuProps) {
+  const id = useId()
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
-    <div className="relative">
-      <ul className="list-none flex items-center gap-2">
-        {items.map(({ label, href, id }) => (
-          <li key={id}>
-            <Link
-              aria-label={label}
-              className="inline-block px-4 py-2 no-underline md:hover:underline"
-              data-testid={id}
-              href={href}
-            >
-              {label}
-            </Link>
-          </li>
-        ))}
-      </ul>
+    <div>
+      <button
+        aria-label="Toggle overlay menu"
+        aria-expanded={isOpen}
+        aria-controls={id}
+        type="button"
+        className="md:hidden cursor-pointer hover:bg-gray-100 rounded-md p-2 w-10"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        🍔
+      </button>
+      <MainMenuNavigation items={items} />
     </div>
   )
 }

@@ -1,5 +1,5 @@
-query GetPageByContentfulId($contentfulId: String!) {
-  pageCollection(where: { contentfulId: $contentfulId }, limit: 1) {
+query PageBySlug($slug: String!) {
+  pageCollection(where: { contentfulId: $slug }, limit: 1) {
     items {
       sys {
         id
@@ -30,3 +30,4 @@ query GetPageByContentfulId($contentfulId: String!) {
     }
   }
 }
+

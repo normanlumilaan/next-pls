@@ -938,36 +938,39 @@ export type AssetFieldsFragment = {
   sys: { __typename?: 'Sys'; id: string }
 }
 
-export type GetArticleQueryVariables = Exact<{
-  id: Scalars['String']['input']
+export type ArticleBySlugQueryVariables = Exact<{
+  slug: Scalars['String']['input']
 }>
 
-export type GetArticleQuery = {
+export type ArticleBySlugQuery = {
   __typename?: 'Query'
-  article?: {
-    __typename?: 'Article'
-    contentfulId?: string | null
-    title?: string | null
-    content?: string | null
-    sys: { __typename?: 'Sys'; id: string }
-    mediaCollection?: {
-      __typename?: 'AssetCollection'
-      items: Array<{
-        __typename?: 'Asset'
-        title?: string | null
-        description?: string | null
-        url?: string | null
-        sys: { __typename?: 'Sys'; id: string }
-      } | null>
-    } | null
+  articleCollection?: {
+    __typename?: 'ArticleCollection'
+    items: Array<{
+      __typename?: 'Article'
+      contentfulId?: string | null
+      title?: string | null
+      content?: string | null
+      sys: { __typename?: 'Sys'; id: string }
+      mediaCollection?: {
+        __typename?: 'AssetCollection'
+        items: Array<{
+          __typename?: 'Asset'
+          title?: string | null
+          description?: string | null
+          url?: string | null
+          sys: { __typename?: 'Sys'; id: string }
+        } | null>
+      } | null
+    } | null>
   } | null
 }
 
-export type GetPageByContentfulIdQueryVariables = Exact<{
-  contentfulId: Scalars['String']['input']
+export type PageBySlugQueryVariables = Exact<{
+  slug: Scalars['String']['input']
 }>
 
-export type GetPageByContentfulIdQuery = {
+export type PageBySlugQuery = {
   __typename?: 'Query'
   pageCollection?: {
     __typename?: 'PageCollection'
@@ -1035,17 +1038,17 @@ export const AssetFieldsFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<AssetFieldsFragment, unknown>
-export const GetArticleDocument = {
+export const ArticleBySlugDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
       operation: 'query',
-      name: { kind: 'Name', value: 'GetArticle' },
+      name: { kind: 'Name', value: 'ArticleBySlug' },
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'slug' } },
           type: {
             kind: 'NonNullType',
             type: {
@@ -1060,15 +1063,29 @@ export const GetArticleDocument = {
         selections: [
           {
             kind: 'Field',
-            name: { kind: 'Name', value: 'article' },
+            name: { kind: 'Name', value: 'articleCollection' },
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'id' },
+                name: { kind: 'Name', value: 'where' },
                 value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'id' },
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'contentfulID' },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'slug' },
+                      },
+                    },
+                  ],
                 },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'limit' },
+                value: { kind: 'IntValue', value: '1' },
               },
             ],
             selectionSet: {
@@ -1076,35 +1093,53 @@ export const GetArticleDocument = {
               selections: [
                 {
                   kind: 'Field',
-                  name: { kind: 'Name', value: 'sys' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                    ],
-                  },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'contentfulId' },
-                },
-                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'content' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'mediaCollection' },
+                  name: { kind: 'Name', value: 'items' },
                   selectionSet: {
                     kind: 'SelectionSet',
                     selections: [
                       {
                         kind: 'Field',
-                        name: { kind: 'Name', value: 'items' },
+                        name: { kind: 'Name', value: 'sys' },
                         selectionSet: {
                           kind: 'SelectionSet',
                           selections: [
                             {
-                              kind: 'FragmentSpread',
-                              name: { kind: 'Name', value: 'AssetFields' },
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'contentfulId' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'content' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'mediaCollection' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'items' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'FragmentSpread',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'AssetFields',
+                                    },
+                                  },
+                                ],
+                              },
                             },
                           ],
                         },
@@ -1145,21 +1180,18 @@ export const GetArticleDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<GetArticleQuery, GetArticleQueryVariables>
-export const GetPageByContentfulIdDocument = {
+} as unknown as DocumentNode<ArticleBySlugQuery, ArticleBySlugQueryVariables>
+export const PageBySlugDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
       operation: 'query',
-      name: { kind: 'Name', value: 'GetPageByContentfulId' },
+      name: { kind: 'Name', value: 'PageBySlug' },
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'contentfulId' },
-          },
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'slug' } },
           type: {
             kind: 'NonNullType',
             type: {
@@ -1187,7 +1219,7 @@ export const GetPageByContentfulIdDocument = {
                       name: { kind: 'Name', value: 'contentfulId' },
                       value: {
                         kind: 'Variable',
-                        name: { kind: 'Name', value: 'contentfulId' },
+                        name: { kind: 'Name', value: 'slug' },
                       },
                     },
                   ],
@@ -1380,7 +1412,4 @@ export const GetPageByContentfulIdDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<
-  GetPageByContentfulIdQuery,
-  GetPageByContentfulIdQueryVariables
->
+} as unknown as DocumentNode<PageBySlugQuery, PageBySlugQueryVariables>

@@ -6,15 +6,11 @@ const accessToken =
   process.env.CONTENTFUL_ACCESS_TOKEN ??
   process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN
 
-if (!process.env.CONTENTFUL_API_URL) {
+if (!process.env.CONTENTFUL_API_URL)
   throw new Error('Missing CONTENTFUL_API_URL')
-}
-if (!process.env.CONTENTFUL_SPACE_ID) {
+if (!process.env.CONTENTFUL_SPACE_ID)
   throw new Error('Missing CONTENTFUL_SPACE_ID')
-}
-if (!accessToken) {
-  throw new Error('Missing CONTENTFUL_ACCESS_TOKEN')
-}
+if (!accessToken) throw new Error('Missing CONTENTFUL_ACCESS_TOKEN')
 
 const config: CodegenConfig = {
   schema: [
