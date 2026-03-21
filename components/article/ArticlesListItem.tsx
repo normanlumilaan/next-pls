@@ -2,17 +2,19 @@ import Link from 'next/link'
 import MediaImage from '@/components/media/MediaImage'
 import type { MediaImageType } from '@/utils/types'
 
+export type ArticlesListItemProps = {
+  title: string
+  content: string
+  media: MediaImageType | null
+  slug: string
+}
+
 export default function ArticlesListItem({
   title,
   content,
   media,
   slug,
-}: {
-  title: string
-  content: string
-  media: MediaImageType | null
-  slug: string
-}) {
+}: ArticlesListItemProps) {
   return (
     <Link href={slug}>
       <li className="flex gap-4">

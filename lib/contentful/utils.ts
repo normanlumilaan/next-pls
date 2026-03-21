@@ -18,16 +18,15 @@ export function requireFirstNonNull<T>(
 }
 
 export async function fetchAllCollectionItems<
-  TItem,
   TCollection extends {
-    items: ReadonlyArray<TItem>
+    items: ReadonlyArray<unknown>
     total?: number | null
   },
 >(
   fetchPage: (limit: number, skip: number) => Promise<TCollection>,
   { pageSize = 100 }: { pageSize?: number } = {},
-): Promise<TItem[]> {
-  const items: TItem[] = []
+): Promise<TCollection['items'] extends ReadonlyArray<infer T> ? T[] : never> {
+  const items: unknown[] = []
   let skip = 0
   let total = Number.POSITIVE_INFINITY
 
@@ -45,5 +44,5 @@ export async function fetchAllCollectionItems<
     skip += pageSize
   }
 
-  return items
+  return items as any
 }

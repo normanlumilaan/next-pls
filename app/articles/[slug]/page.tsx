@@ -8,15 +8,11 @@ import { fetchAllCollectionItems } from '@/lib/contentful/utils'
 import { createMediaProps } from '@/utils/media'
 
 export async function generateStaticParams() {
-  type CollectionItem = Awaited<
-    ReturnType<typeof getContentfulArticleCollection>
-  >['items'][number]
-
   const items = await fetchAllCollectionItems(getContentfulArticleCollection, {
     pageSize: 100,
   })
 
-  return (items as CollectionItem[])
+  return items
     .map(item => item.slug)
     .filter((slug): slug is string => Boolean(slug))
     .map(slug => ({ slug }))

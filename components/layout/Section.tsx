@@ -23,7 +23,7 @@ export default function Section({
   const Tag = tag
 
   return (
-    <Tag className={clsx('section', className)} {...rest}>
+    <Tag className={clsx('layout-section', className)} {...rest}>
       {children}
     </Tag>
   )
