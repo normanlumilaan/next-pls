@@ -1,0 +1,15 @@
+query GetArticle($id: String!) {
+  article(id: $id) {
+    sys {
+      id
+    }
+    contentfulId
+    title
+    content
+    mediaCollection {
+      items {
+        ...AssetFields
+      }
+    }
+  }
+}
