@@ -16,3 +16,34 @@ export function requireFirstNonNull<T>(
   if (!item) throw new Error(message)
   return item
 }
+
+export async function fetchAllCollectionItems<
+  TItem,
+  TCollection extends {
+    items: ReadonlyArray<TItem>
+    total?: number | null
+  },
+>(
+  fetchPage: (limit: number, skip: number) => Promise<TCollection>,
+  { pageSize = 100 }: { pageSize?: number } = {},
+): Promise<TItem[]> {
+  const items: TItem[] = []
+  let skip = 0
+  let total = Number.POSITIVE_INFINITY
+
+  while (skip < total) {
+    const page = await fetchPage(pageSize, skip)
+    items.push(...page.items)
+
+    // Prefer server-reported total; fall back to "stop when page is short"
+    if (typeof page.total === 'number') {
+      total = page.total
+    } else if (page.items.length < pageSize) {
+      break
+    }
+
+    skip += pageSize
+  }
+
+  return items
+}

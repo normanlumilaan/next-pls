@@ -2,7 +2,7 @@ import Container from '@/components/layout/Container'
 import Hero from '@/components/layout/Hero'
 import Section from '@/components/layout/Section'
 
-export default function HomePage() {
+export default function ArticlesListingPage() {
   return (
     <>
       <Hero

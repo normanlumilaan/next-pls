@@ -1,10 +1,6 @@
-import clsx from 'clsx'
 import Article from '@/components/article/Article'
-import Header from '@/components/header/Header'
 import Container from '@/components/layout/Container'
-import Footer from '@/components/layout/Footer'
 import Hero from '@/components/layout/Hero'
-import PageLayout from '@/components/layout/PageLayout'
 
 import type { MediaImageType } from '@/utils/types'
 
@@ -22,8 +18,7 @@ export default function ArticlePage({
   media,
 }: ArticlePageProps) {
   return (
-    <PageLayout className={clsx('page-article', `page-article-${slug}`)}>
-      <Header />
+    <>
       <Hero
         id="hero"
         className="py-24 min-h-[80dvh] text-white flex flex-col items-start justify-end"
@@ -34,7 +29,6 @@ export default function ArticlePage({
       <Container>
         <Article title={title} content={content} media={media} />
       </Container>
-      <Footer />
-    </PageLayout>
+    </>
   )
 }

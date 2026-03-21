@@ -1,14 +1,10 @@
-import Header from '@/components/header/Header'
 import Container from '@/components/layout/Container'
-import Footer from '@/components/layout/Footer'
 import Hero from '@/components/layout/Hero'
-import PageLayout from '@/components/layout/PageLayout'
 import Section from '@/components/layout/Section'
 
 export default function Page() {
   return (
-    <PageLayout>
-      <Header />
+    <>
       <Hero
         id="hero"
         className="py-24 min-h-[80dvh] text-white flex flex-col items-start justify-end"
@@ -21,7 +17,6 @@ export default function Page() {
           <h1>Home</h1>
         </Container>
       </Section>
-      <Footer />
-    </PageLayout>
+    </>
   )
 }

@@ -4,29 +4,22 @@ import {
   getContentfulArticleBySlug,
   getContentfulArticleCollection,
 } from '@/lib/contentful/api/article'
+import { fetchAllCollectionItems } from '@/lib/contentful/utils'
 import { createMediaProps } from '@/utils/media'
 
 export async function generateStaticParams() {
-  const params: Array<{ slug: string }> = []
-  const pageSize = 100
-  let skip = 0
-  let total = Number.POSITIVE_INFINITY
+  type CollectionItem = Awaited<
+    ReturnType<typeof getContentfulArticleCollection>
+  >['items'][number]
 
-  while (skip < total) {
-    const collection = await getContentfulArticleCollection(pageSize, skip)
-    total = collection.total ?? 0
+  const items = await fetchAllCollectionItems(getContentfulArticleCollection, {
+    pageSize: 100,
+  })
 
-    for (const item of collection.items) {
-      const id = item.slug ?? null
-      if (!id) continue
-
-      params.push({ slug: id })
-    }
-
-    skip += pageSize
-  }
-
-  return params
+  return (items as CollectionItem[])
+    .map(item => item.slug)
+    .filter((slug): slug is string => Boolean(slug))
+    .map(slug => ({ slug }))
 }
 
 export async function generateMetadata({

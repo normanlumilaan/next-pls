@@ -22,7 +22,8 @@
       "@/*": ["./*"],
       "@/pages/*": ["./pages/*"],
       "@/components/*": ["./components/*"],
-      "@/public/*": ["./public/*"]
+      "@/public/*": ["./public/*"],
+      "@/styles/*": ["./styles/*"]
     }
   },
   "include": [

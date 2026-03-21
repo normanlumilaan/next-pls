@@ -19,7 +19,7 @@ export default function Footer({
       {...rest}
     >
       <Container>
-        <div className="text-center text-sm">
+        <div className="text-center text-sm text-gray-400">
           <span>
             © {new Date().getFullYear()} {getAppName()}. All rights reserved.
           </span>
