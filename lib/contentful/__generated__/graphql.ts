@@ -44,6 +44,7 @@ export type Article = Entry &
     linkedFrom?: Maybe<ArticleLinkingCollections>
     mediaCollection?: Maybe<AssetCollection>
     mediaCursorCollection?: Maybe<AssetCursorCollection>
+    slug?: Maybe<Scalars['String']['output']>
     sys: Sys
     title?: Maybe<Scalars['String']['output']>
   }
@@ -81,6 +82,12 @@ export type ArticleMediaCursorCollectionArgs = {
   pageNext?: InputMaybe<Scalars['String']['input']>
   pagePrev?: InputMaybe<Scalars['String']['input']>
   preview?: InputMaybe<Scalars['Boolean']['input']>
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>
+}
+
+/** [See type definition](https://app.contentful.com/spaces/nfnhlzdw6rne/content_types/article) */
+export type ArticleSlugArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>
 }
 
@@ -126,6 +133,13 @@ export type ArticleFilter = {
   >
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>
   mediaCollection_exists?: InputMaybe<Scalars['Boolean']['input']>
+  slug?: InputMaybe<Scalars['String']['input']>
+  slug_contains?: InputMaybe<Scalars['String']['input']>
+  slug_exists?: InputMaybe<Scalars['Boolean']['input']>
+  slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  slug_not?: InputMaybe<Scalars['String']['input']>
+  slug_not_contains?: InputMaybe<Scalars['String']['input']>
+  slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   sys?: InputMaybe<SysFilter>
   title?: InputMaybe<Scalars['String']['input']>
   title_contains?: InputMaybe<Scalars['String']['input']>
@@ -162,6 +176,8 @@ export type ArticleLinkingCollectionsEntryCursorCollectionArgs = {
 export enum ArticleOrder {
   ContentfulIdAsc = 'contentfulID_ASC',
   ContentfulIdDesc = 'contentfulID_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -585,6 +601,7 @@ export type Page = Entry &
     customContentCollection?: Maybe<PageCustomContentCollection>
     customContentCursorCollection?: Maybe<PageCustomContentCursorCollection>
     linkedFrom?: Maybe<PageLinkingCollections>
+    slug?: Maybe<Scalars['String']['output']>
     sys: Sys
     title?: Maybe<Scalars['String']['output']>
   }
@@ -617,6 +634,12 @@ export type PageCustomContentCursorCollectionArgs = {
 /** [See type definition](https://app.contentful.com/spaces/nfnhlzdw6rne/content_types/page) */
 export type PageLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+}
+
+/** [See type definition](https://app.contentful.com/spaces/nfnhlzdw6rne/content_types/page) */
+export type PageSlugArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>
 }
 
 /** [See type definition](https://app.contentful.com/spaces/nfnhlzdw6rne/content_types/page) */
@@ -669,6 +692,13 @@ export type PageFilter = {
   >
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>
   customContentCollection_exists?: InputMaybe<Scalars['Boolean']['input']>
+  slug?: InputMaybe<Scalars['String']['input']>
+  slug_contains?: InputMaybe<Scalars['String']['input']>
+  slug_exists?: InputMaybe<Scalars['Boolean']['input']>
+  slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  slug_not?: InputMaybe<Scalars['String']['input']>
+  slug_not_contains?: InputMaybe<Scalars['String']['input']>
+  slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   sys?: InputMaybe<SysFilter>
   title?: InputMaybe<Scalars['String']['input']>
   title_contains?: InputMaybe<Scalars['String']['input']>
@@ -705,6 +735,8 @@ export type PageLinkingCollectionsEntryCursorCollectionArgs = {
 export enum PageOrder {
   ContentfulIdAsc = 'contentfulId_ASC',
   ContentfulIdDesc = 'contentfulId_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -935,6 +967,8 @@ export type AssetFieldsFragment = {
   title?: string | null
   description?: string | null
   url?: string | null
+  width?: number | null
+  height?: number | null
   sys: { __typename?: 'Sys'; id: string }
 }
 
@@ -948,7 +982,7 @@ export type ArticleBySlugQuery = {
     __typename?: 'ArticleCollection'
     items: Array<{
       __typename?: 'Article'
-      contentfulId?: string | null
+      slug?: string | null
       title?: string | null
       content?: string | null
       sys: { __typename?: 'Sys'; id: string }
@@ -959,6 +993,42 @@ export type ArticleBySlugQuery = {
           title?: string | null
           description?: string | null
           url?: string | null
+          width?: number | null
+          height?: number | null
+          sys: { __typename?: 'Sys'; id: string }
+        } | null>
+      } | null
+    } | null>
+  } | null
+}
+
+export type ArticleCollectionQueryVariables = Exact<{
+  limit: Scalars['Int']['input']
+  skip?: InputMaybe<Scalars['Int']['input']>
+}>
+
+export type ArticleCollectionQuery = {
+  __typename?: 'Query'
+  articleCollection?: {
+    __typename?: 'ArticleCollection'
+    total: number
+    limit: number
+    skip: number
+    items: Array<{
+      __typename?: 'Article'
+      slug?: string | null
+      title?: string | null
+      content?: string | null
+      sys: { __typename?: 'Sys'; id: string }
+      mediaCollection?: {
+        __typename?: 'AssetCollection'
+        items: Array<{
+          __typename?: 'Asset'
+          title?: string | null
+          description?: string | null
+          url?: string | null
+          width?: number | null
+          height?: number | null
           sys: { __typename?: 'Sys'; id: string }
         } | null>
       } | null
@@ -976,7 +1046,7 @@ export type PageBySlugQuery = {
     __typename?: 'PageCollection'
     items: Array<{
       __typename?: 'Page'
-      contentfulId?: string | null
+      slug?: string | null
       title?: string | null
       sys: { __typename?: 'Sys'; id: string }
       customContentCollection?: {
@@ -984,7 +1054,7 @@ export type PageBySlugQuery = {
         items: Array<
           | {
               __typename: 'Article'
-              contentfulId?: string | null
+              slug?: string | null
               title?: string | null
               content?: string | null
               sys: { __typename?: 'Sys'; id: string }
@@ -995,6 +1065,8 @@ export type PageBySlugQuery = {
                   title?: string | null
                   description?: string | null
                   url?: string | null
+                  width?: number | null
+                  height?: number | null
                   sys: { __typename?: 'Sys'; id: string }
                 } | null>
               } | null
@@ -1033,6 +1105,8 @@ export const AssetFieldsFragmentDoc = {
           { kind: 'Field', name: { kind: 'Name', value: 'title' } },
           { kind: 'Field', name: { kind: 'Name', value: 'description' } },
           { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'width' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'height' } },
         ],
       },
     },
@@ -1073,7 +1147,7 @@ export const ArticleBySlugDocument = {
                   fields: [
                     {
                       kind: 'ObjectField',
-                      name: { kind: 'Name', value: 'contentfulID' },
+                      name: { kind: 'Name', value: 'slug' },
                       value: {
                         kind: 'Variable',
                         name: { kind: 'Name', value: 'slug' },
@@ -1110,10 +1184,7 @@ export const ArticleBySlugDocument = {
                           ],
                         },
                       },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'contentfulId' },
-                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'slug' } },
                       { kind: 'Field', name: { kind: 'Name', value: 'title' } },
                       {
                         kind: 'Field',
@@ -1176,11 +1247,161 @@ export const ArticleBySlugDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'title' } },
           { kind: 'Field', name: { kind: 'Name', value: 'description' } },
           { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'width' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'height' } },
         ],
       },
     },
   ],
 } as unknown as DocumentNode<ArticleBySlugQuery, ArticleBySlugQueryVariables>
+export const ArticleCollectionDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'ArticleCollection' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'limit' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'skip' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+          defaultValue: { kind: 'IntValue', value: '0' },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'articleCollection' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'limit' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'limit' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'skip' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'skip' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'items' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'sys' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                          ],
+                        },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'slug' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'content' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'mediaCollection' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'items' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'FragmentSpread',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'AssetFields',
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'total' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'limit' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'skip' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'AssetFields' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'Asset' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'sys' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'width' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'height' } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  ArticleCollectionQuery,
+  ArticleCollectionQueryVariables
+>
 export const PageBySlugDocument = {
   kind: 'Document',
   definitions: [
@@ -1216,7 +1437,7 @@ export const PageBySlugDocument = {
                   fields: [
                     {
                       kind: 'ObjectField',
-                      name: { kind: 'Name', value: 'contentfulId' },
+                      name: { kind: 'Name', value: 'slug' },
                       value: {
                         kind: 'Variable',
                         name: { kind: 'Name', value: 'slug' },
@@ -1253,10 +1474,7 @@ export const PageBySlugDocument = {
                           ],
                         },
                       },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'contentfulId' },
-                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'slug' } },
                       { kind: 'Field', name: { kind: 'Name', value: 'title' } },
                       {
                         kind: 'Field',
@@ -1317,10 +1535,7 @@ export const PageBySlugDocument = {
                                         },
                                         {
                                           kind: 'Field',
-                                          name: {
-                                            kind: 'Name',
-                                            value: 'contentfulId',
-                                          },
+                                          name: { kind: 'Name', value: 'slug' },
                                         },
                                         {
                                           kind: 'Field',
@@ -1408,6 +1623,8 @@ export const PageBySlugDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'title' } },
           { kind: 'Field', name: { kind: 'Name', value: 'description' } },
           { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'width' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'height' } },
         ],
       },
     },

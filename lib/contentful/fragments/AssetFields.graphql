@@ -5,5 +5,7 @@ fragment AssetFields on Asset {
   title
   description
   url
+  width
+  height
 }
 
