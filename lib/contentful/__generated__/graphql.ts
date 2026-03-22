@@ -352,6 +352,8 @@ export type AssetLinkingCollections = {
   blogPostCursorCollection?: Maybe<BlogPostCursorCollection>
   entryCollection?: Maybe<EntryCollection>
   entryCursorCollection?: Maybe<EntryCursorCollection>
+  galleryCollection?: Maybe<GalleryCollection>
+  galleryCursorCollection?: Maybe<GalleryCursorCollection>
 }
 
 export type AssetLinkingCollectionsArticleCollectionArgs = {
@@ -397,6 +399,23 @@ export type AssetLinkingCollectionsEntryCollectionArgs = {
 }
 
 export type AssetLinkingCollectionsEntryCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+  locale?: InputMaybe<Scalars['String']['input']>
+  pageNext?: InputMaybe<Scalars['String']['input']>
+  pagePrev?: InputMaybe<Scalars['String']['input']>
+  preview?: InputMaybe<Scalars['Boolean']['input']>
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>
+}
+
+export type AssetLinkingCollectionsGalleryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+  locale?: InputMaybe<Scalars['String']['input']>
+  preview?: InputMaybe<Scalars['Boolean']['input']>
+  skip?: InputMaybe<Scalars['Int']['input']>
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>
+}
+
+export type AssetLinkingCollectionsGalleryCursorCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>
   locale?: InputMaybe<Scalars['String']['input']>
   pageNext?: InputMaybe<Scalars['String']['input']>
@@ -658,6 +677,149 @@ export enum EntryOrder {
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
+/** [See type definition](https://app.contentful.com/spaces/nfnhlzdw6rne/content_types/gallery) */
+export type Gallery = Entry &
+  _Node & {
+    __typename?: 'Gallery'
+    _id: Scalars['ID']['output']
+    contentfulId?: Maybe<Scalars['String']['output']>
+    contentfulMetadata: ContentfulMetadata
+    description?: Maybe<Scalars['String']['output']>
+    imagesCollectionCollection?: Maybe<AssetCollection>
+    imagesCollectionCursorCollection?: Maybe<AssetCursorCollection>
+    linkedFrom?: Maybe<GalleryLinkingCollections>
+    sys: Sys
+    title?: Maybe<Scalars['String']['output']>
+  }
+
+/** [See type definition](https://app.contentful.com/spaces/nfnhlzdw6rne/content_types/gallery) */
+export type GalleryContentfulIdArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>
+}
+
+/** [See type definition](https://app.contentful.com/spaces/nfnhlzdw6rne/content_types/gallery) */
+export type GalleryDescriptionArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>
+}
+
+/** [See type definition](https://app.contentful.com/spaces/nfnhlzdw6rne/content_types/gallery) */
+export type GalleryImagesCollectionCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+  locale?: InputMaybe<Scalars['String']['input']>
+  preview?: InputMaybe<Scalars['Boolean']['input']>
+  skip?: InputMaybe<Scalars['Int']['input']>
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>
+}
+
+/** [See type definition](https://app.contentful.com/spaces/nfnhlzdw6rne/content_types/gallery) */
+export type GalleryImagesCollectionCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+  locale?: InputMaybe<Scalars['String']['input']>
+  pageNext?: InputMaybe<Scalars['String']['input']>
+  pagePrev?: InputMaybe<Scalars['String']['input']>
+  preview?: InputMaybe<Scalars['Boolean']['input']>
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>
+}
+
+/** [See type definition](https://app.contentful.com/spaces/nfnhlzdw6rne/content_types/gallery) */
+export type GalleryLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+}
+
+/** [See type definition](https://app.contentful.com/spaces/nfnhlzdw6rne/content_types/gallery) */
+export type GalleryTitleArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>
+}
+
+export type GalleryCollection = {
+  __typename?: 'GalleryCollection'
+  items: Array<Maybe<Gallery>>
+  limit: Scalars['Int']['output']
+  skip: Scalars['Int']['output']
+  total: Scalars['Int']['output']
+}
+
+export type GalleryCursorCollection = {
+  __typename?: 'GalleryCursorCollection'
+  items: Array<Maybe<Gallery>>
+  limit: Scalars['Int']['output']
+  pages: CursorPages
+}
+
+export type GalleryFilter = {
+  AND?: InputMaybe<Array<InputMaybe<GalleryFilter>>>
+  OR?: InputMaybe<Array<InputMaybe<GalleryFilter>>>
+  contentfulId?: InputMaybe<Scalars['String']['input']>
+  contentfulId_contains?: InputMaybe<Scalars['String']['input']>
+  contentfulId_exists?: InputMaybe<Scalars['Boolean']['input']>
+  contentfulId_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  contentfulId_not?: InputMaybe<Scalars['String']['input']>
+  contentfulId_not_contains?: InputMaybe<Scalars['String']['input']>
+  contentfulId_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>
+  description?: InputMaybe<Scalars['String']['input']>
+  description_contains?: InputMaybe<Scalars['String']['input']>
+  description_exists?: InputMaybe<Scalars['Boolean']['input']>
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  description_not?: InputMaybe<Scalars['String']['input']>
+  description_not_contains?: InputMaybe<Scalars['String']['input']>
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  imagesCollectionCollection_exists?: InputMaybe<Scalars['Boolean']['input']>
+  sys?: InputMaybe<SysFilter>
+  title?: InputMaybe<Scalars['String']['input']>
+  title_contains?: InputMaybe<Scalars['String']['input']>
+  title_exists?: InputMaybe<Scalars['Boolean']['input']>
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  title_not?: InputMaybe<Scalars['String']['input']>
+  title_not_contains?: InputMaybe<Scalars['String']['input']>
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+}
+
+export type GalleryLinkingCollections = {
+  __typename?: 'GalleryLinkingCollections'
+  entryCollection?: Maybe<EntryCollection>
+  entryCursorCollection?: Maybe<EntryCursorCollection>
+}
+
+export type GalleryLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+  locale?: InputMaybe<Scalars['String']['input']>
+  preview?: InputMaybe<Scalars['Boolean']['input']>
+  skip?: InputMaybe<Scalars['Int']['input']>
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>
+}
+
+export type GalleryLinkingCollectionsEntryCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+  locale?: InputMaybe<Scalars['String']['input']>
+  pageNext?: InputMaybe<Scalars['String']['input']>
+  pagePrev?: InputMaybe<Scalars['String']['input']>
+  preview?: InputMaybe<Scalars['Boolean']['input']>
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>
+}
+
+export enum GalleryOrder {
+  ContentfulIdAsc = 'contentfulId_ASC',
+  ContentfulIdDesc = 'contentfulId_DESC',
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+}
+
 export enum ImageFormat {
   /** AVIF image format. */
   Avif = 'AVIF',
@@ -759,6 +921,7 @@ export type Page = Entry &
   _Node & {
     __typename?: 'Page'
     _id: Scalars['ID']['output']
+    content?: Maybe<PageContent>
     contentfulId?: Maybe<Scalars['String']['output']>
     contentfulMetadata: ContentfulMetadata
     customContentCollection?: Maybe<PageCustomContentCollection>
@@ -768,6 +931,12 @@ export type Page = Entry &
     sys: Sys
     title?: Maybe<Scalars['String']['output']>
   }
+
+/** [See type definition](https://app.contentful.com/spaces/nfnhlzdw6rne/content_types/page) */
+export type PageContentArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>
+}
 
 /** [See type definition](https://app.contentful.com/spaces/nfnhlzdw6rne/content_types/page) */
 export type PageContentfulIdArgs = {
@@ -819,6 +988,54 @@ export type PageCollection = {
   total: Scalars['Int']['output']
 }
 
+export type PageContent = {
+  __typename?: 'PageContent'
+  json: Scalars['JSON']['output']
+  links: PageContentLinks
+}
+
+export type PageContentAssets = {
+  __typename?: 'PageContentAssets'
+  block: Array<Maybe<Asset>>
+  hyperlink: Array<Maybe<Asset>>
+}
+
+export type PageContentEntries = {
+  __typename?: 'PageContentEntries'
+  block: Array<Maybe<Entry>>
+  hyperlink: Array<Maybe<Entry>>
+  inline: Array<Maybe<Entry>>
+}
+
+export type PageContentLinks = {
+  __typename?: 'PageContentLinks'
+  assets: PageContentAssets
+  entries: PageContentEntries
+  resources: PageContentResources
+}
+
+export type PageContentResources = {
+  __typename?: 'PageContentResources'
+  block: Array<PageContentResourcesBlock>
+  hyperlink: Array<PageContentResourcesHyperlink>
+  inline: Array<PageContentResourcesInline>
+}
+
+export type PageContentResourcesBlock = ResourceLink & {
+  __typename?: 'PageContentResourcesBlock'
+  sys: ResourceSys
+}
+
+export type PageContentResourcesHyperlink = ResourceLink & {
+  __typename?: 'PageContentResourcesHyperlink'
+  sys: ResourceSys
+}
+
+export type PageContentResourcesInline = ResourceLink & {
+  __typename?: 'PageContentResourcesInline'
+  sys: ResourceSys
+}
+
 export type PageCursorCollection = {
   __typename?: 'PageCursorCollection'
   items: Array<Maybe<Page>>
@@ -844,6 +1061,9 @@ export type PageCustomContentCursorCollection = {
 export type PageFilter = {
   AND?: InputMaybe<Array<InputMaybe<PageFilter>>>
   OR?: InputMaybe<Array<InputMaybe<PageFilter>>>
+  content_contains?: InputMaybe<Scalars['String']['input']>
+  content_exists?: InputMaybe<Scalars['Boolean']['input']>
+  content_not_contains?: InputMaybe<Scalars['String']['input']>
   contentfulId?: InputMaybe<Scalars['String']['input']>
   contentfulId_contains?: InputMaybe<Scalars['String']['input']>
   contentfulId_exists?: InputMaybe<Scalars['Boolean']['input']>
@@ -927,6 +1147,9 @@ export type Query = {
   blogPostCursorCollection?: Maybe<BlogPostCursorCollection>
   entryCollection?: Maybe<EntryCollection>
   entryCursorCollection?: Maybe<EntryCursorCollection>
+  gallery?: Maybe<Gallery>
+  galleryCollection?: Maybe<GalleryCollection>
+  galleryCursorCollection?: Maybe<GalleryCursorCollection>
   page?: Maybe<Page>
   pageCollection?: Maybe<PageCollection>
   pageCursorCollection?: Maybe<PageCursorCollection>
@@ -1051,6 +1274,34 @@ export type QueryEntryCursorCollectionArgs = {
   where?: InputMaybe<EntryFilter>
 }
 
+export type QueryGalleryArgs = {
+  id: Scalars['String']['input']
+  locale?: InputMaybe<Scalars['String']['input']>
+  preview?: InputMaybe<Scalars['Boolean']['input']>
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>
+}
+
+export type QueryGalleryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+  locale?: InputMaybe<Scalars['String']['input']>
+  order?: InputMaybe<Array<InputMaybe<GalleryOrder>>>
+  preview?: InputMaybe<Scalars['Boolean']['input']>
+  skip?: InputMaybe<Scalars['Int']['input']>
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>
+  where?: InputMaybe<GalleryFilter>
+}
+
+export type QueryGalleryCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+  locale?: InputMaybe<Scalars['String']['input']>
+  order?: InputMaybe<Array<InputMaybe<GalleryOrder>>>
+  pageNext?: InputMaybe<Scalars['String']['input']>
+  pagePrev?: InputMaybe<Scalars['String']['input']>
+  preview?: InputMaybe<Scalars['Boolean']['input']>
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>
+  where?: InputMaybe<GalleryFilter>
+}
+
 export type QueryPageArgs = {
   id: Scalars['String']['input']
   locale?: InputMaybe<Scalars['String']['input']>
@@ -1077,6 +1328,16 @@ export type QueryPageCursorCollectionArgs = {
   preview?: InputMaybe<Scalars['Boolean']['input']>
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>
   where?: InputMaybe<PageFilter>
+}
+
+export type ResourceLink = {
+  sys: ResourceSys
+}
+
+export type ResourceSys = {
+  __typename?: 'ResourceSys'
+  linkType: Scalars['String']['output']
+  urn: Scalars['String']['output']
 }
 
 export type Sys = {
@@ -1186,6 +1447,82 @@ export type AssetFieldsFragment = {
   sys: { __typename?: 'Sys'; id: string }
 }
 
+export type GalleryFragment = {
+  __typename?: 'Gallery'
+  title?: string | null
+  description?: string | null
+  sys: { __typename?: 'Sys'; id: string }
+  imagesCollectionCollection?: {
+    __typename?: 'AssetCollection'
+    items: Array<{
+      __typename?: 'Asset'
+      title?: string | null
+      description?: string | null
+      url?: string | null
+      width?: number | null
+      height?: number | null
+      sys: { __typename?: 'Sys'; id: string }
+    } | null>
+  } | null
+}
+
+export type PageFragment = {
+  __typename?: 'Page'
+  slug?: string | null
+  title?: string | null
+  sys: { __typename?: 'Sys'; id: string }
+  content?: { __typename?: 'PageContent'; json: any } | null
+}
+
+export type PageCustomContentFragment = {
+  __typename?: 'Page'
+  customContentCollection?: {
+    __typename?: 'PageCustomContentCollection'
+    items: Array<
+      | {
+          __typename: 'Article'
+          slug?: string | null
+          title?: string | null
+          content?: string | null
+          sys: { __typename?: 'Sys'; id: string }
+          mediaCollection?: {
+            __typename?: 'AssetCollection'
+            items: Array<{
+              __typename?: 'Asset'
+              title?: string | null
+              description?: string | null
+              url?: string | null
+              width?: number | null
+              height?: number | null
+              sys: { __typename?: 'Sys'; id: string }
+            } | null>
+          } | null
+        }
+      | { __typename: 'BlogPost'; sys: { __typename?: 'Sys'; id: string } }
+      | {
+          __typename: 'Gallery'
+          title?: string | null
+          description?: string | null
+          sys: { __typename?: 'Sys'; id: string }
+          imagesCollectionCollection?: {
+            __typename?: 'AssetCollection'
+            items: Array<{
+              __typename?: 'Asset'
+              title?: string | null
+              description?: string | null
+              url?: string | null
+              width?: number | null
+              height?: number | null
+              sys: { __typename?: 'Sys'; id: string }
+            } | null>
+          } | null
+        }
+      | { __typename: 'Page'; sys: { __typename?: 'Sys'; id: string } }
+      | null
+    >
+  } | null
+}
+
 export type ArticleBySlugQueryVariables = Exact<{
   slug: Scalars['String']['input']
 }>
@@ -1263,6 +1600,7 @@ export type PageBySlugQuery = {
       slug?: string | null
       title?: string | null
       sys: { __typename?: 'Sys'; id: string }
+      content?: { __typename?: 'PageContent'; json: any } | null
       customContentCollection?: {
         __typename?: 'PageCustomContentCollection'
         items: Array<
@@ -1286,6 +1624,24 @@ export type PageBySlugQuery = {
               } | null
             }
           | { __typename: 'BlogPost'; sys: { __typename?: 'Sys'; id: string } }
+          | {
+              __typename: 'Gallery'
+              title?: string | null
+              description?: string | null
+              sys: { __typename?: 'Sys'; id: string }
+              imagesCollectionCollection?: {
+                __typename?: 'AssetCollection'
+                items: Array<{
+                  __typename?: 'Asset'
+                  title?: string | null
+                  description?: string | null
+                  url?: string | null
+                  width?: number | null
+                  height?: number | null
+                  sys: { __typename?: 'Sys'; id: string }
+                } | null>
+              } | null
+            }
           | { __typename: 'Page'; sys: { __typename?: 'Sys'; id: string } }
           | null
         >
@@ -1294,6 +1650,46 @@ export type PageBySlugQuery = {
   } | null
 }
 
+export const PageFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'Page' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'Page' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'sys' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'slug' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'content' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'json' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<PageFragment, unknown>
 export const AssetFieldsFragmentDoc = {
   kind: 'Document',
   definitions: [
@@ -1408,6 +1804,294 @@ export const ArticleFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<ArticleFragment, unknown>
+export const GalleryFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'Gallery' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'Gallery' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'sys' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'imagesCollectionCollection' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'items' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'AssetFields' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'AssetFields' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'Asset' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'sys' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'width' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'height' } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GalleryFragment, unknown>
+export const PageCustomContentFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'PageCustomContent' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'Page' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'customContentCollection' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'items' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: '__typename' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'sys' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'InlineFragment',
+                        typeCondition: {
+                          kind: 'NamedType',
+                          name: { kind: 'Name', value: 'Article' },
+                        },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'FragmentSpread',
+                              name: { kind: 'Name', value: 'Article' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'InlineFragment',
+                        typeCondition: {
+                          kind: 'NamedType',
+                          name: { kind: 'Name', value: 'Gallery' },
+                        },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'FragmentSpread',
+                              name: { kind: 'Name', value: 'Gallery' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'AssetFields' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'Asset' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'sys' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'width' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'height' } },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'Article' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'Article' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'sys' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'slug' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'content' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'mediaCollection' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'items' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'AssetFields' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'Gallery' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'Gallery' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'sys' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'imagesCollectionCollection' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'items' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'AssetFields' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<PageCustomContentFragment, unknown>
 export const ArticleBySlugDocument = {
   kind: 'Document',
   definitions: [
@@ -1774,134 +2458,12 @@ export const PageBySlugDocument = {
                     kind: 'SelectionSet',
                     selections: [
                       {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'sys' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'id' },
-                            },
-                          ],
-                        },
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'Page' },
                       },
-                      { kind: 'Field', name: { kind: 'Name', value: 'slug' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'title' } },
                       {
-                        kind: 'Field',
-                        name: {
-                          kind: 'Name',
-                          value: 'customContentCollection',
-                        },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'items' },
-                              selectionSet: {
-                                kind: 'SelectionSet',
-                                selections: [
-                                  {
-                                    kind: 'Field',
-                                    name: { kind: 'Name', value: '__typename' },
-                                  },
-                                  {
-                                    kind: 'Field',
-                                    name: { kind: 'Name', value: 'sys' },
-                                    selectionSet: {
-                                      kind: 'SelectionSet',
-                                      selections: [
-                                        {
-                                          kind: 'Field',
-                                          name: { kind: 'Name', value: 'id' },
-                                        },
-                                      ],
-                                    },
-                                  },
-                                  {
-                                    kind: 'InlineFragment',
-                                    typeCondition: {
-                                      kind: 'NamedType',
-                                      name: { kind: 'Name', value: 'Article' },
-                                    },
-                                    selectionSet: {
-                                      kind: 'SelectionSet',
-                                      selections: [
-                                        {
-                                          kind: 'Field',
-                                          name: { kind: 'Name', value: 'sys' },
-                                          selectionSet: {
-                                            kind: 'SelectionSet',
-                                            selections: [
-                                              {
-                                                kind: 'Field',
-                                                name: {
-                                                  kind: 'Name',
-                                                  value: 'id',
-                                                },
-                                              },
-                                            ],
-                                          },
-                                        },
-                                        {
-                                          kind: 'Field',
-                                          name: { kind: 'Name', value: 'slug' },
-                                        },
-                                        {
-                                          kind: 'Field',
-                                          name: {
-                                            kind: 'Name',
-                                            value: 'title',
-                                          },
-                                        },
-                                        {
-                                          kind: 'Field',
-                                          name: {
-                                            kind: 'Name',
-                                            value: 'content',
-                                          },
-                                        },
-                                        {
-                                          kind: 'Field',
-                                          name: {
-                                            kind: 'Name',
-                                            value: 'mediaCollection',
-                                          },
-                                          selectionSet: {
-                                            kind: 'SelectionSet',
-                                            selections: [
-                                              {
-                                                kind: 'Field',
-                                                name: {
-                                                  kind: 'Name',
-                                                  value: 'items',
-                                                },
-                                                selectionSet: {
-                                                  kind: 'SelectionSet',
-                                                  selections: [
-                                                    {
-                                                      kind: 'FragmentSpread',
-                                                      name: {
-                                                        kind: 'Name',
-                                                        value: 'AssetFields',
-                                                      },
-                                                    },
-                                                  ],
-                                                },
-                                              },
-                                            ],
-                                          },
-                                        },
-                                      ],
-                                    },
-                                  },
-                                ],
-                              },
-                            },
-                          ],
-                        },
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'PageCustomContent' },
                       },
                     ],
                   },
@@ -1937,6 +2499,216 @@ export const PageBySlugDocument = {
           { kind: 'Field', name: { kind: 'Name', value: 'url' } },
           { kind: 'Field', name: { kind: 'Name', value: 'width' } },
           { kind: 'Field', name: { kind: 'Name', value: 'height' } },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'Article' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'Article' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'sys' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'slug' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'content' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'mediaCollection' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'items' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'AssetFields' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'Gallery' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'Gallery' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'sys' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'imagesCollectionCollection' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'items' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'AssetFields' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'Page' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'Page' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'sys' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'slug' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'content' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'json' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'PageCustomContent' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'Page' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'customContentCollection' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'items' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: '__typename' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'sys' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'InlineFragment',
+                        typeCondition: {
+                          kind: 'NamedType',
+                          name: { kind: 'Name', value: 'Article' },
+                        },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'FragmentSpread',
+                              name: { kind: 'Name', value: 'Article' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'InlineFragment',
+                        typeCondition: {
+                          kind: 'NamedType',
+                          name: { kind: 'Name', value: 'Gallery' },
+                        },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'FragmentSpread',
+                              name: { kind: 'Name', value: 'Gallery' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
         ],
       },
     },

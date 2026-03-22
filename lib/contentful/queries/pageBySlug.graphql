@@ -1,32 +1,8 @@
 query PageBySlug($slug: String!) {
   pageCollection(where: { slug: $slug }, limit: 1) {
     items {
-      sys {
-        id
-      }
-      slug
-      title
-      customContentCollection {
-        items {
-          __typename
-          sys {
-            id
-          }
-          ... on Article {
-            sys {
-              id
-            }
-            slug
-            title
-            content
-            mediaCollection {
-              items {
-                ...AssetFields
-              }
-            }
-          }
-        }
-      }
+      ...Page
+      ...PageCustomContent
     }
   }
 }

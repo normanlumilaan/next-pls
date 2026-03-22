@@ -1,0 +1,19 @@
+fragment PageCustomContent on Page {
+  customContentCollection {
+    items {
+      __typename
+      sys {
+        id
+      }
+
+      ... on Article {
+        ...Article
+      }
+
+      ... on Gallery {
+        ...Gallery
+      }
+    }
+  }
+}
+

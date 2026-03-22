@@ -1,0 +1,10 @@
+fragment Page on Page {
+  sys {
+    id
+  }
+  slug
+  title
+  content {
+    json
+  }
+}

@@ -1,0 +1,12 @@
+fragment Gallery on Gallery {
+  sys {
+    id
+  }
+  title
+  description
+  imagesCollectionCollection {
+    items {
+      ...AssetFields
+    }
+  }
+}
