@@ -23,9 +23,8 @@ export default function ArticlesListingPage({
       <Hero
         title="Articles"
         subtitle="Welcome to the articles page"
-        backgroundImage="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        id="hero"
-        className="py-24 min-h-[80dvh] text-white flex flex-col items-start justify-end"
+        src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        alt="Alt text here"
       />
       <Section id="articles" className="py-16">
         <Container>

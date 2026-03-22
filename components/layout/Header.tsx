@@ -13,7 +13,7 @@ export default function Header({ className, ...rest }: HeaderProps) {
     <header
       id="header"
       data-testid="header"
-      className="header py-4 shadow-md"
+      className="relative z-20 header py-4 shadow-md"
       {...rest}
     >
       <Container>

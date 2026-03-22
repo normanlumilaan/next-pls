@@ -1,6 +1,6 @@
-import Article from '@/components/article/Article'
 import Container from '@/components/layout/Container'
 import Hero from '@/components/layout/Hero'
+import Section from '@/components/layout/Section'
 
 import type { MediaImageType } from '@/utils/types'
 
@@ -20,15 +20,16 @@ export default function ArticlePage({
   return (
     <>
       <Hero
-        id="hero"
-        className="py-24 min-h-[80dvh] text-white flex flex-col items-start justify-end"
-      >
-        <h1 className="text-4xl font-bold">Articles here</h1>
-        <strong>Welcome to the home page</strong>
-      </Hero>
-      <Container>
-        <Article title={title} content={content} media={media} />
-      </Container>
+        title={title}
+        subtitle="Welcome to the article page"
+        src={media?.src ?? ''}
+        alt="Alt text here"
+      />
+      <Section id="article" className="py-16">
+        <Container>
+          <article>{content}</article>
+        </Container>
+      </Section>
     </>
   )
 }
