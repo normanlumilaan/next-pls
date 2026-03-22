@@ -7,7 +7,9 @@ import Section from '@/components/layout/Section'
 export type HeroProps = ComponentPropsWithoutRef<'div'> & {
   title?: string
   subtitle?: string
-  backgroundImage?: string
+  src?: string
+  alt?: string
+  color?: 'light' | 'dark'
 }
 
 export default function Hero({
@@ -16,7 +18,9 @@ export default function Hero({
   children,
   title,
   subtitle,
-  backgroundImage,
+  src,
+  alt,
+  color = 'light',
   ...rest
 }: HeroProps) {
   return (
@@ -29,15 +33,20 @@ export default function Hero({
       id={id}
       {...rest}
     >
-      <Container className="relative z-10 py-10 flex flex-col items-start justify-end h-full">
-        {title && <h1 className="text-4xl font-bold">{title}</h1>}
-        {subtitle && <p className="text-lg">{subtitle}</p>}
+      <Container
+        className={clsx(
+          'relative z-10 py-10 flex flex-col items-start justify-end h-full',
+          color === 'light' ? 'text-white' : 'text-black',
+        )}
+      >
+        {title && <h1 className="text-4xl font-bold text-inherit">{title}</h1>}
+        {subtitle && <p className="text-lg text-inherit">{subtitle}</p>}
         {children}
       </Container>
-      {backgroundImage && (
+      {src && (
         <Image
-          src={backgroundImage}
-          alt={title ?? ''}
+          src={src}
+          alt={alt ?? ''}
           fill
           priority
           sizes="100vw"

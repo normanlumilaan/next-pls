@@ -1,22 +1,13 @@
-import Container from '@/components/layout/Container'
-import Hero from '@/components/layout/Hero'
-import Section from '@/components/layout/Section'
+import HomePage from '@/components/views/HomePage'
+import { createSeoDocmentTitle } from '@/utils/seo'
+
+export const generateMetadata = async () => {
+  return {
+    title: createSeoDocmentTitle('Home'),
+    description: 'Welcome to the home page',
+  }
+}
 
 export default function Page() {
-  return (
-    <>
-      <Hero
-        id="hero"
-        className="py-24 min-h-[80dvh] text-white flex flex-col items-start justify-end"
-      >
-        <h1 className="text-4xl font-bold">Your AI-Powered Travel Companion</h1>
-        <strong>Welcome to the home page</strong>
-      </Hero>
-      <Section id="welcome">
-        <Container>
-          <h1>Home</h1>
-        </Container>
-      </Section>
-    </>
-  )
+  return <HomePage />
 }

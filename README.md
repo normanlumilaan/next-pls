@@ -32,3 +32,7 @@ npm run biome:ci
 
 The app is configured for static export and deploys via GitHub Actions to GitHub
 Pages under `/next-pls` (outputs to `out/`).
+
+[Comntentful CLI migration](https://github.com/contentful/contentful-migration/blob/main/README.md)
+
+[Contentful field types](https://www.contentful.com/developers/docs/extensibility/app-framework/editor-interfaces/)

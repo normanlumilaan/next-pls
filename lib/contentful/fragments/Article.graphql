@@ -1,0 +1,13 @@
+fragment Article on Article {
+  sys {
+    id
+  }
+  slug
+  title
+  content
+  mediaCollection {
+    items {
+      ...AssetFields
+    }
+  }
+}

@@ -1,17 +1,7 @@
 query ArticleCollection($limit: Int!, $skip: Int = 0) {
   articleCollection(limit: $limit, skip: $skip) {
     items {
-      sys {
-        id
-      }
-      slug
-      title
-      content
-      mediaCollection {
-        items {
-          ...AssetFields
-        }
-      }
+      ...Article
     }
     total
     limit
